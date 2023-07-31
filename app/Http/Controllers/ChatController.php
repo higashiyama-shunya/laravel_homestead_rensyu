@@ -13,6 +13,7 @@ class ChatController extends Controller
     //チャットルームの新規作成
     public function createChatRoom(Request $request, ChatRoom $chatRoom)
     {
+        //Requestでuserが送られて、それを$request->user()->id;でidを取得している。
         $chatRoom->chat_room_name = $request->input('chat_room_name');
         $chatRoom->owner_id = $request->user()->id;
         $chatRoom->save();
@@ -28,6 +29,7 @@ class ChatController extends Controller
     //チャットルームのデータ取得
     public function getChatRoom(Request $request)
     {
+        //whereを使って条件で抽出した値だけを取得する。
         $chatRoom = ChatRoom::where("owner_id", $request->user()->id)->get();
         if ($chatRoom == null) {
             $chatUser = ChatUser::where("user_id", $request->user()->id)->get();
