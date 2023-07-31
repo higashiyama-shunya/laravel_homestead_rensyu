@@ -18,7 +18,9 @@ class JoinChatRoomTest extends TestCase
 
     public function setUp(): void
     {
+
         parent::setUp();
+        //ここでユーザーを作成している。名前などは適当なやつをlarvelが付けてくれる。
         $this->user = User::factory()->create();
     }
 
@@ -26,6 +28,7 @@ class JoinChatRoomTest extends TestCase
     public function test_join_chat_room(): void
     {
         $chat_room_id = 1;
+        //作成したユーザーを使ってテスト。
         $response = $this->actingAs($this->user)->post('api/joinChatRoom', ['user' => $this->user, 'chat_room_id' => $chat_room_id]);
         $chat_user_list = ChatUser::where("user_id", $this->user->id)->get();
         printf("user_id:" . $this->user->id . "\n");

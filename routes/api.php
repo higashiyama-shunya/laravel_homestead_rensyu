@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//後ろに->middleware('auth:sanctum');とついているのはそのAPIに行く前にauth:sanctumというミドルウェアを一度介してから行くということ。
+//今回だとログイン認証が間に挟まれる。ログインしてトークンを送って要れば問題なく入れるが、ログインをしていなくてトークンが送っていない場合エラーになる。
 Route::post('/createChatRoom', 'App\Http\Controllers\ChatController@createChatRoom')->middleware('auth:sanctum');
 Route::post('/getChatRoom', 'App\Http\Controllers\ChatController@getChatRoom')->middleware('auth:sanctum');
 Route::post('/joinChatRoom', 'App\Http\Controllers\ChatController@joinChatRoom')->middleware('auth:sanctum');
